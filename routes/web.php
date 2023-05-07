@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/article', [ArticleController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/article/create', [ArticleController::class, 'create'])->middleware(['auth', 'verified'])->name('create-article');
+Route::post('/article/create', [ArticleController::class, 'store'])->middleware(['auth', 'verified'])->name('store-article');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
