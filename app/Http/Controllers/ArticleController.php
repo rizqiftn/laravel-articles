@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreFileRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Route;
 
 class ArticleController extends Controller
 {
@@ -12,6 +14,12 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $articles = (new Article())->getAllArticles(10);
+
+        if ( Route::currentRouteName() == 'article-api') {
+            return new Response([
+                'data' => $articles
+            ]);
+        }
 
         return view('/article/index', compact('articles'));
     }
