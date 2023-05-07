@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('/article', [ArticleController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/article/create', [ArticleController::class, 'create'])->middleware(['auth', 'verified'])->name('create-article');
 Route::post('/article/create', [ArticleController::class, 'store'])->middleware(['auth', 'verified'])->name('store-article');
+Route::delete('/article/delete', [ArticleController::class, 'destroy'])->middleware(['auth', 'verified'])->name('destroy-article');
 Route::get('/api/articles', [ArticleController::class, 'index'])->name('article-api');
 
 Route::middleware('auth')->group(function () {

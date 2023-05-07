@@ -8,6 +8,19 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-8 min-h-min flex flex-col">
+                @if(Session::has('success'))
+                    <div role="alert">
+                        <div class="bg-gray-700 text-white font-bold rounded-t px-4 py-2">
+                            Success
+                        </div>
+                        <div class="border border-t-0 border-gray-500 rounded-b bg-gray-500 px-4 py-3 text-white">
+                            <p>{{ Session::get('success') }}</p>
+                        </div>
+                    </div> <br>
+                    @php
+                        Session::forget('success');
+                    @endphp
+                @endif
                 <a href="{{ route('create-article') }}" class="max-w-fit bg-gray-700 dark:bg-gray-700 dark:text-white hover:bg-gray-500 text-white font-bold py-2 px-4 rounded my-2">
                     Add new Article
                 </a>
@@ -46,8 +59,11 @@
                                 {{ $article->email }}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a> <br>
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Delete</a>
+                                <form method="post" action="{{url('article/delete?id='.$article->id)}}">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @empty

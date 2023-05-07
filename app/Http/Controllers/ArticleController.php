@@ -42,4 +42,10 @@ class ArticleController extends Controller
         ]);
         return back()->with('success', 'Create Article Success!');
     }
+
+    public function destroy(Article $article)
+    {
+        $article->delete();
+        return back()->with('success', 'Delete Article Success!');
+    }
 }
