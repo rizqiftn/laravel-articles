@@ -35,6 +35,10 @@
                                 {{ $article->title }}
                             </th>
                             <td class="px-6 py-4 text-gray-900">
+                                @if (file_exists(public_path('uploads') . '/' . $article->article_img))
+                                    <img src="{{ url('/uploads/'.$article->article_img) }}" class="max-w-xs"/>
+                                    <br>
+                                @endif
                                 {{ $article->content }}
                             </td>
                             <td class="px-6 py-4 text-gray-900">
@@ -43,7 +47,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a> <br>
-                                <a href="#" class="font-medium text-blue-600 hover:underline">Preview Article</a>
+                                <a href="#" class="font-medium text-blue-600 hover:underline">Delete</a>
                             </td>
                         </tr>
                     @empty
